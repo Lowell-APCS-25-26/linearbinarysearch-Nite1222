@@ -25,7 +25,7 @@ public class Sketch {
   };                             
   public int linearSearch(int catNumToFind){
     for(int i=0; i<store.length;i++){
-    if(store[i].getCatNum()==catNumToFind && store[i].getInventory()>0){
+    if(store[i].getCatNum()==catNumToFind){
       return store[i].getInventory();
     }
   }
@@ -35,7 +35,7 @@ public class Sketch {
     if(startIndex>=store.length){
     return -1;
   }
-    else if(store[startIndex].getCatNum()==catNumToFind && store[i].getInventory()>0){
+    else if(store[startIndex].getCatNum()==catNumToFind){
       return store[startIndex].getInventory();
   }
     return recursiveLinearSearch(catNumToFind,startIndex+1);
@@ -45,34 +45,35 @@ public class Sketch {
     int low= 0;
   while(high>=low){
     int guess= (high+low)/2;
-    if(store[guess].getCatNum()==catNumToFind && store[guess].getInventory()>0){
+    if(store[guess].getCatNum()==catNumToFind){
       return store[guess].getInventory();
     }
     else if(store[guess].getCatNum()<catNumToFind){
-    low=guess+1;
+      low=guess+1;
   }
     else{
       high=guess-1;
     }
     return -1;
+  }
 }
-  }
-  }
+
   public int recursiveBinarySearch(int catNumToFind, int nLow, int nHigh){
    if (nLow>nHigh){
     return -1;
   }
   int guess= (nLow+nHigh)/2;
   if(store[guess].getCatNum()>catNumToFind){
-    return recursiveBinarySearch(catNumToFind,low,guess-1);
+    return recursiveBinarySearch(catNumToFind,nLow,guess-1);
   }
   else if(store[guess].getCatNum()<catNumToFind){
-    return recursiveBinarySearch(catNumToFind,guess+1,high);
+    return recursiveBinarySearch(catNumToFind,guess+1,nHigh);
   }
   else{
     return store[guess].getInventory();
   }
   }
+}
   public void tester(){
     int[] tests = {0, 183, 184, 2370, 15320, 19967, 19968};
     System.out.println();
